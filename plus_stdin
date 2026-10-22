@@ -9,7 +9,10 @@ def tonum(s):
 
 x = 0
 for line in sys.stdin:
+	line = line.rstrip()
+	x += tonum(line)
 	x += float(line)
+
 
 print(x)
 print("いえーい", file=sys.stderr)
