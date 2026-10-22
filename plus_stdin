@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# SPDX-FileCopyrightText: 2026 Seiya Fukushima
 import sys
 
 def tonum(s):
