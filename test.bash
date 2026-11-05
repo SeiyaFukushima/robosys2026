@@ -1,4 +1,6 @@
 #!/bin/bash
+# SPDX-FileCopyrightText: 2026 Seiya Fukushima
+# SPDX-License-Identifier: BSD-3-Clause
 ng (){
 	echo "${1}行目のテスト失敗"
 }
@@ -6,8 +8,24 @@ ng (){
 ng 123
 
 res=0
-a=seiya
-[ "$a" = seiya ] || ng "$LINENO"
-[ "$a" = seiya ] || ng "$LINENO"
+out=$(seq 5 | ./plus)
+[ "${out}" = 15 ] || ng "$LINENO"
+[ "${res}" = 0 ] && echo OK
+
+out=$(seq 5 | ./plus)
+[ "$?" = 0 ]      || ng "$LINENO"
+[ "${out}" = 15 ] || ng "$LINENO"
+
+### STRANGE INPUT ###
+out=$(echo あ | ./plus)           #計算できない値を入力してみる
+[ "$?" = 1 ]      || ng "$LINENO" #終了ステータスが1なのを確認
+[ "${out}" = "" ] || ng "$LINENO" #上の行と入れ替えるとダメ（なぜ？）
+
+out=$(echo | ./plus)              #なにも入力しない
+[ "$?" = 1 ]      || ng "$LINENO" #これも異常終了する
+[ "${out}" = "" ] || ng "$LINENO"
+
+[ "${res}" = 0 ] && echo OK
+exit $res
  
 exit $res

@@ -5,7 +5,7 @@ import sys
 def tonum(s):
 	try:
 		return int(s)
-	expect ValueError:
+	except ValueError:
 		return float(s)
 
 x = 0
