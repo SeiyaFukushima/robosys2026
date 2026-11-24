@@ -1,0 +1,31 @@
+#!/usr/bin/python3
+# SPDX-FileCopyrightText: 2026 Seiya Fukushima
+# SPDX-License-Identifier: BSD-3-Clause
+
+import sys
+
+lap_times = []
+
+# 標準入力からラップタイムを読み込む
+for line in sys.stdin:
+    try:
+        lap_time = float(line.strip())
+        lap_times.append(lap_time)
+    except ValueError:
+        print("数字以外が入力されています", file=sys.stderr)
+        sys.exit(1)
+
+# データがない場合
+if len(lap_times) == 0:
+    print("You have to enter lap times", file=sys.stderr)
+    sys.exit(1)
+
+# 集計
+best = min(lap_times)
+worst = max(lap_times)
+average = sum(lap_times) / len(lap_times)
+
+# 結果を表示
+print(f"Fastest lap: {best:.2f} sec")
+print(f"Slowest lap: {worst:.2f} sec")
+print(f"Average lap: {average:.2f} sec")
